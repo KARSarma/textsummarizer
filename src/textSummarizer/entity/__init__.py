@@ -14,6 +14,7 @@ class DataTransformationConfig:
     data_path: Path
     tokenizer_name: Path
 
+@dataclass  # Add this decorator
 class ModelTrainerConfig:
     root_dir: Path
     data_path: Path
