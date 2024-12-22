@@ -1,9 +1,6 @@
 venv/
 artifacts/
 logs/
-
 **/__pycache__/
 *.pyc
-
 model_cache/
-
