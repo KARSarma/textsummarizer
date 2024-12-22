@@ -1,6 +1,5 @@
 artifacts_root: artifacts
 
-
 data_ingestion:
   root_dir: artifacts/data_ingestion
   source_URL: https://raw.githubusercontent.com/KARSarma/datasets/main/summarizer-data.zip
@@ -10,12 +9,26 @@ data_ingestion:
 data_transformation:
   root_dir: artifacts/data_transformation
   data_path: artifacts/data_ingestion/samsum_dataset
-  tokenizer_name: google/pegasus-cnn_dailymail
+  tokenizer_name: google/pegasus-xsum  # Set the tokenizer to the desired model
+
 
 model_trainer:
   root_dir: artifacts/model_trainer
   data_path: artifacts/data_transformation/samsum_dataset
-  model_ckpt: google/pegasus-cnn_dailymail
+  model_ckpt: google/pegasus-xsum
+  num_train_epochs: 1
+  warmup_steps: 500
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  weight_decay: 0.01
+  logging_steps: 10
+  evaluation_strategy: steps
+  eval_steps: 500
+  save_steps: 1000
+  gradient_accumulation_steps: 16
+  train_subset: 200
+  eval_subset: 50
+
 
 model_evaluation:
   root_dir: artifacts/model_evaluation
@@ -23,4 +36,3 @@ model_evaluation:
   model_path: artifacts/model_trainer/pegasus-samsum-model
   tokenizer_path: artifacts/model_trainer/tokenizer
   metric_file_name: artifacts/model_evaluation/metrics.csv
-  
