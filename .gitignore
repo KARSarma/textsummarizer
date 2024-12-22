@@ -4,3 +4,4 @@ logs/
 **/__pycache__/
 *.pyc
 model_cache/
+.DS_Store
